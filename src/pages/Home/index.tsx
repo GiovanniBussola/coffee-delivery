@@ -1,4 +1,4 @@
-import { IconBorder, HomeContainer, ButtonWithIcon } from './styles'
+import { IconBorder, HomeContainer, ButtonWithIcon, Container } from './styles'
 import { ShoppingCart, Package, Clock, Coffee, MapPin } from 'phosphor-react'
 import { defaultTheme } from '../../styles/themes/default'
 
@@ -8,7 +8,7 @@ import logo from '../../assets/logo.svg'
 export function Home() {
   return (
     <HomeContainer>
-      <div>
+      <Container>
         <header>
           <img src={logo} alt="Logo" />
           <div>
@@ -24,10 +24,11 @@ export function Home() {
         <main>
           <aside>
             <h1>
-              Encontre o café perfeito <br></br>para qualquer hora do dia
+              Encontre o café perfeito <br />
+              para qualquer hora do dia
             </h1>
             <p>
-              Com o Coffee Delivery você recebe seu café onde estiver, a
+              Com o Coffee Delivery você recebe seu café onde estiver, a <br />
               qualquer hora
             </p>
 
@@ -59,9 +60,9 @@ export function Home() {
             </ul>
           </aside>
 
-          <img src={banner} alt="banner" width={476} height={260}></img>
+          <img src={banner} alt="banner" width={476} height={400}></img>
         </main>
-      </div>
+      </Container>
     </HomeContainer>
   )
 }

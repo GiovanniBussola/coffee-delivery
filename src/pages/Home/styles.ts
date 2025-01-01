@@ -7,8 +7,6 @@ export const HomeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  /* padding: 1rem; */
-
   header {
     margin-top: 2rem;
     width: 100%;
@@ -34,13 +32,16 @@ export const HomeContainer = styled.div`
       p {
         margin-top: 1rem;
         color: ${(props) => props.theme['gray-400']};
+        font-size: 20px;
       }
     }
 
     h1 {
+      margin-top: 1.5rem;
       font-family: 'Baloo 2';
       font-size: 3rem;
-      line-height: 3rem;
+      line-height: 4rem;
+      font-weight: 900;
     }
 
     ul {
@@ -58,9 +59,14 @@ export const HomeContainer = styled.div`
     li {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 12px;
+      color: ${(props) => props.theme['gray-300']};
     }
   }
+`
+
+export const Container = styled.div`
+  width: 1120px;
 `
 
 interface IconBorderProps {

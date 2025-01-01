@@ -9,7 +9,7 @@ export const defaultTheme = {
 
   'gray-100': '#D7D5D5',
   'gray-200': '#8D8686',
-  'gray-300': '#574F4D',
+  'gray-300': '#574F4D', // base-text
   'gray-400': '#403937',
   'gray-500': '#272221',
 }

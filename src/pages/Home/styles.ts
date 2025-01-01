@@ -4,10 +4,8 @@ import { defaultTheme } from '../../styles/themes/default'
 export const HomeContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  justify-content: center;
 
   /* padding: 1rem; */
 
@@ -16,11 +14,19 @@ export const HomeContainer = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   main {
     display: flex;
+    justify-content: space-between;
     margin-top: 6rem;
     width: 100%;
 
@@ -59,14 +65,35 @@ export const HomeContainer = styled.div`
 
 interface IconBorderProps {
   color: keyof typeof defaultTheme
-  format?: 'square' | 'circle'
 }
 
 export const IconBorder = styled.div<IconBorderProps>`
   background-color: ${(props) => props.theme[props.color]};
   box-sizing: border-box;
-  border-radius: ${(props) => (props.format === 'square' ? '20%' : '100%')};
+  border-radius: 100%;
   width: 2rem;
   height: 2rem;
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+interface ButtonWithIconProps {
+  backgroundColor: keyof typeof defaultTheme
+  textColor?: keyof typeof defaultTheme
+}
+
+export const ButtonWithIcon = styled.button<ButtonWithIconProps>`
+  margin-right: 1rem;
+  cursor: pointer;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.63rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: ${(props) => props.theme[props.backgroundColor]};
+  color: ${(props) => props.theme[props.textColor || 'gray-100']};
 `

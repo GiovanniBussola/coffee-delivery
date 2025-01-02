@@ -1,9 +1,19 @@
-import { IconBorder, HomeContainer, ButtonWithIcon, Container } from './styles'
+import {
+  IconBorder,
+  HomeContainer,
+  ButtonWithIcon,
+  Container,
+  CoffeeCard,
+  CoffeeCardFooter,
+  CoffeeCardBody,
+  CoffeeCardHeader,
+} from './styles'
 import { ShoppingCart, Package, Clock, Coffee, MapPin } from 'phosphor-react'
 import { defaultTheme } from '../../styles/themes/default'
 
 import banner from '../../assets/banner.svg'
 import logo from '../../assets/logo.svg'
+import baseCoffee from '../../assets/base-coffee.png'
 
 export function Home() {
   return (
@@ -62,6 +72,28 @@ export function Home() {
 
           <img src={banner} alt="banner" width={476} height={400}></img>
         </main>
+        <div>
+          <CoffeeCard>
+            <img src={baseCoffee} alt="Café base" />
+            <CoffeeCardHeader>
+              <span>TRADICIONAL</span>
+            </CoffeeCardHeader>
+
+            <CoffeeCardBody>
+              <h3>Expresso Tradicional</h3>
+              <p>O tradicional café feito com água quente e grãos moídos</p>
+            </CoffeeCardBody>
+            <CoffeeCardFooter>
+              <span>
+                R$ <b>9,90</b>
+              </span>
+              <input type="number" name="qtd" id="qtd" min={1} />
+              <ButtonWithIcon backgroundColor="purple-500">
+                <ShoppingCart weight="fill" color="white" size={20} />
+              </ButtonWithIcon>
+            </CoffeeCardFooter>
+          </CoffeeCard>
+        </div>
       </Container>
     </HomeContainer>
   )

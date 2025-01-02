@@ -103,3 +103,65 @@ export const ButtonWithIcon = styled.button<ButtonWithIconProps>`
   background-color: ${(props) => props.theme[props.backgroundColor]};
   color: ${(props) => props.theme[props.textColor || 'gray-100']};
 `
+
+export const CoffeeCard = styled.div`
+  background-color: ${(props) => props.theme['white-300']};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+
+  border-radius: 6px 36px;
+  width: 256px;
+  height: 310px;
+
+  div {
+    display: flex;
+    gap: 10px;
+  }
+
+  img {
+    width: 120px;
+    margin-top: calc(0px - 2rem - 5px);
+  }
+
+  input {
+    width: 50px;
+  }
+`
+
+export const CoffeeCardHeader = styled.div`
+  span {
+    font-size: 10px;
+    font-weight: 800;
+    background-color: ${(props) => props.theme['yellow-100']};
+    color: ${(props) => props.theme['yellow-500']};
+
+    padding: 7px;
+    border-radius: 20px;
+  }
+`
+
+export const CoffeeCardBody = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 236px;
+
+  p {
+    font-size: 14px;
+    color: ${(props) => props.theme['gray-200']};
+    text-align: center;
+  }
+
+  h3 {
+    color: ${(props) => props.theme['gray-400']};
+    font-size: 20px;
+    font-weight: 800;
+  }
+`
+
+export const CoffeeCardFooter = styled.div``

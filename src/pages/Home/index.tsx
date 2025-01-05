@@ -71,8 +71,8 @@ const products: Product[] = [
     id: 3,
     name: 'Cremoso',
     description: 'Café expresso tradicional com espuma cremosa',
-    price: 10.5,
-    img: '../../assets/coffees/americano.png',
+    price: 9.5,
+    img: '../../assets/coffees/expresso-cremoso.png',
     tags: ['TRADICIONAL'],
   },
   {
@@ -122,7 +122,7 @@ const products: Product[] = [
     name: 'Chocolate Quente',
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
     price: 10,
-    img: '../../assets/coffees/mocaccino.png',
+    img: '../../assets/coffees/chocolate-quente.png',
     tags: ['ESPECIAL', 'COM LEITE'],
   },
   {
@@ -131,7 +131,7 @@ const products: Product[] = [
     description:
       'Drink gelado de café expresso com rum, creme de leite e hortelã',
     price: 10,
-    img: '../../assets/coffees/mocaccino.png',
+    img: '../../assets/coffees/cubano.png',
     tags: ['ESPECIAL', 'GELADO', 'ALCOÓLICO'],
   },
   {
@@ -153,10 +153,11 @@ const products: Product[] = [
 ]
 
 const cart: Cart = {
-  items: [],
+  items: [
+    { productId: 1, quantity: 5 },
+    { productId: 1, quantity: 5 },
+  ],
 }
-
-console.log(cart)
 
 export function Home() {
   return (
@@ -231,7 +232,9 @@ export function Home() {
 
           <img src={banner} alt="banner" width={476} height={400}></img>
         </main>
+
         <h2>Nossos cafés</h2>
+
         <CoffeeCardsGroup>
           {products.map((product) => {
             return (
@@ -245,20 +248,27 @@ export function Home() {
                 </CoffeeCardHeader>
 
                 <CoffeeCardBody>
-                  <h3>Expresso Tradicional</h3>
-                  <p>O tradicional café feito com água quente e grãos moídos</p>
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
                 </CoffeeCardBody>
                 <CoffeeCardFooter>
                   <span>
-                    R$ <b>9,90</b>
+                    R${' '}
+                    <b>
+                      {Intl.NumberFormat('pt-BR', {
+                        currency: 'BRL',
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).format(product.price)}
+                    </b>
                   </span>
                   <ButtonGroup>
                     <button>
-                      <Minus color={defaultTheme['purple-500']} />
+                      <Minus color={defaultTheme['purple-300']} />
                     </button>
                     <div>1</div>
                     <button>
-                      <Plus color={defaultTheme['purple-500']} />
+                      <Plus color={defaultTheme['purple-300']} />
                     </button>
                   </ButtonGroup>
                   <ButtonWithIcon backgroundColor="purple-500">

@@ -19,6 +19,7 @@ export const HomeContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 0.5rem;
     }
   }
 
@@ -67,6 +68,12 @@ export const HomeContainer = styled.div`
 
 export const Container = styled.div`
   width: 1120px;
+
+  h2 {
+    color: ${(props) => props.theme['gray-400']};
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
+  }
 `
 
 interface IconBorderProps {
@@ -93,8 +100,8 @@ export const ButtonWithIcon = styled.button<ButtonWithIconProps>`
   cursor: pointer;
   border: 0;
   border-radius: 8px;
-  max-height: 50px;
-  padding: 0.63rem;
+  padding: 0.6rem;
+  height: 2.2rem;
 
   display: flex;
   align-items: center;

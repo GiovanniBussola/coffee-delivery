@@ -84,6 +84,7 @@ export function Home() {
 
           <img src={banner} alt="banner" width={476} height={400}></img>
         </main>
+        <h2>Nossos cafés</h2>
         <CoffeeCardsGroup>
           {products.map((value) => {
             return (

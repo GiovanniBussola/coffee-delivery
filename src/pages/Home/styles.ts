@@ -130,6 +130,12 @@ export const CoffeeCard = styled.div`
   }
 `
 
+export const CoffeeCardsGroup = styled.div`
+  display: flex;
+  gap: 3rem 2rem;
+  flex-wrap: wrap;
+`
+
 export const CoffeeCardHeader = styled.div`
   span {
     font-size: 10px;

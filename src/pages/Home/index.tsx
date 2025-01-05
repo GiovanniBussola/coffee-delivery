@@ -8,6 +8,7 @@ import {
   CoffeeCardBody,
   CoffeeCardHeader,
   ButtonGroup,
+  CoffeeCardsGroup,
 } from './styles'
 import {
   ShoppingCart,
@@ -25,6 +26,8 @@ import logo from '../../assets/logo.svg'
 import baseCoffee from '../../assets/base-coffee.png'
 
 export function Home() {
+  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
   return (
     <HomeContainer>
       <Container>
@@ -81,36 +84,40 @@ export function Home() {
 
           <img src={banner} alt="banner" width={476} height={400}></img>
         </main>
-        <div>
-          <CoffeeCard>
-            <img src={baseCoffee} alt="Café base" />
-            <CoffeeCardHeader>
-              <span>TRADICIONAL</span>
-            </CoffeeCardHeader>
+        <CoffeeCardsGroup>
+          {products.map((value) => {
+            return (
+              <CoffeeCard key={value}>
+                <img src={baseCoffee} alt="Café base" />
+                <CoffeeCardHeader>
+                  <span>TRADICIONAL</span>
+                </CoffeeCardHeader>
 
-            <CoffeeCardBody>
-              <h3>Expresso Tradicional</h3>
-              <p>O tradicional café feito com água quente e grãos moídos</p>
-            </CoffeeCardBody>
-            <CoffeeCardFooter>
-              <span>
-                R$ <b>9,90</b>
-              </span>
-              <ButtonGroup>
-                <button>
-                  <Minus color={defaultTheme['purple-500']} />
-                </button>
-                <div>1</div>
-                <button>
-                  <Plus color={defaultTheme['purple-500']} />
-                </button>
-              </ButtonGroup>
-              <ButtonWithIcon backgroundColor="purple-500">
-                <ShoppingCart weight="fill" color="white" size={20} />
-              </ButtonWithIcon>
-            </CoffeeCardFooter>
-          </CoffeeCard>
-        </div>
+                <CoffeeCardBody>
+                  <h3>Expresso Tradicional</h3>
+                  <p>O tradicional café feito com água quente e grãos moídos</p>
+                </CoffeeCardBody>
+                <CoffeeCardFooter>
+                  <span>
+                    R$ <b>9,90</b>
+                  </span>
+                  <ButtonGroup>
+                    <button>
+                      <Minus color={defaultTheme['purple-500']} />
+                    </button>
+                    <div>1</div>
+                    <button>
+                      <Plus color={defaultTheme['purple-500']} />
+                    </button>
+                  </ButtonGroup>
+                  <ButtonWithIcon backgroundColor="purple-500">
+                    <ShoppingCart weight="fill" color="white" size={20} />
+                  </ButtonWithIcon>
+                </CoffeeCardFooter>
+              </CoffeeCard>
+            )
+          })}
+        </CoffeeCardsGroup>
       </Container>
     </HomeContainer>
   )

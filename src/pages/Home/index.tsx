@@ -9,6 +9,7 @@ import {
   CoffeeCardHeader,
   ButtonGroup,
   CoffeeCardsGroup,
+  CartItemsCount,
 } from './styles'
 import {
   ShoppingCart,
@@ -38,6 +39,15 @@ interface Product {
   price: number
   img: string
   tags: string[]
+}
+
+interface CartItem {
+  productId: number
+  quantity: number
+}
+
+interface Cart {
+  items: CartItem[]
 }
 
 const products: Product[] = [
@@ -142,20 +152,42 @@ const products: Product[] = [
   },
 ]
 
+const cart: Cart = {
+  items: [],
+}
+
+console.log(cart)
+
 export function Home() {
   return (
     <HomeContainer>
       <Container>
         <header>
           <img src={logo} alt="Logo" />
+
           <div>
             <ButtonWithIcon backgroundColor="purple-100" textColor="purple-300">
-              <MapPin weight="fill" color={defaultTheme['purple-300']} />
+              <MapPin
+                weight="fill"
+                color={defaultTheme['purple-300']}
+                size={22}
+              />
               Douradina, PR
             </ButtonWithIcon>
-            <ButtonWithIcon backgroundColor="yellow-100">
-              <ShoppingCart weight="fill" color={defaultTheme['yellow-500']} />
-            </ButtonWithIcon>
+            <>
+              <ButtonWithIcon backgroundColor="yellow-100">
+                <ShoppingCart
+                  weight="fill"
+                  color={defaultTheme['yellow-500']}
+                  size={22}
+                />
+              </ButtonWithIcon>
+              {cart.items.length ? (
+                <CartItemsCount>{cart.items.length}</CartItemsCount>
+              ) : (
+                ''
+              )}
+            </>
           </div>
         </header>
         <main>

@@ -19,7 +19,7 @@ export const HomeContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 1rem;
     }
   }
 
@@ -64,6 +64,21 @@ export const HomeContainer = styled.div`
       color: ${(props) => props.theme['gray-300']};
     }
   }
+`
+
+export const CartItemsCount = styled.span`
+  background-color: ${(props) => props.theme['yellow-500']};
+  color: ${(props) => props.theme['white-100']};
+  font-size: 14px;
+  width: 1.3rem;
+  height: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  padding: 0.2rem;
+  margin: calc(0px - 1.5rem - 5px) 0 0 calc(0px - 1.5rem - 5px);
 `
 
 export const Container = styled.div`

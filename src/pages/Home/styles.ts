@@ -90,10 +90,10 @@ interface ButtonWithIconProps {
 }
 
 export const ButtonWithIcon = styled.button<ButtonWithIconProps>`
-  margin-right: 1rem;
   cursor: pointer;
   border: 0;
   border-radius: 8px;
+  max-height: 50px;
   padding: 0.63rem;
 
   display: flex;
@@ -118,7 +118,6 @@ export const CoffeeCard = styled.div`
 
   div {
     display: flex;
-    gap: 10px;
   }
 
   img {
@@ -164,4 +163,35 @@ export const CoffeeCardBody = styled.div`
   }
 `
 
-export const CoffeeCardFooter = styled.div``
+export const CoffeeCardFooter = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    color: ${(props) => props.theme['gray-300']};
+  }
+
+  b {
+    color: ${(props) => props.theme['gray-300']};
+    font-size: 24px;
+  }
+`
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: ${(props) => props.theme['white-500']};
+  margin: 10px;
+  gap: 10px;
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+
+  button {
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    background-color: ${(props) => props.theme['white-500']};
+  }
+`

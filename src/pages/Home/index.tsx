@@ -23,11 +23,126 @@ import { defaultTheme } from '../../styles/themes/default'
 
 import banner from '../../assets/banner.svg'
 import logo from '../../assets/logo.svg'
-import baseCoffee from '../../assets/base-coffee.png'
+
+const coffeeImages = import.meta.glob<{ default: string }>(
+  '../../assets/coffees/*.png',
+  {
+    eager: true,
+  },
+)
+
+interface Product {
+  id: number
+  name: string
+  description: string
+  price: number
+  img: string
+  tags: string[]
+}
+
+const products: Product[] = [
+  {
+    id: 1,
+    name: 'Expresso Tradicional',
+    description: 'O tradicional café feito com água quente e grãos moídos',
+    price: 9.9,
+    img: '../../assets/coffees/expresso.png',
+    tags: ['TRADICIONAL'],
+  },
+  {
+    id: 2,
+    name: 'Expresso Americano',
+    description: 'Expresso diluído, menos intenso que o tradicional',
+    price: 10.5,
+    img: '../../assets/coffees/americano.png',
+    tags: ['TRADICIONAL'],
+  },
+  {
+    id: 3,
+    name: 'Cremoso',
+    description: 'Café expresso tradicional com espuma cremosa',
+    price: 10.5,
+    img: '../../assets/coffees/americano.png',
+    tags: ['TRADICIONAL'],
+  },
+  {
+    id: 4,
+    name: 'Expresso gelado',
+    description: 'Bebida preparada com café expresso e cubos de gelo',
+    price: 10.5,
+    img: '../../assets/coffees/cafe-gelado.png',
+    tags: ['TRADICIONAL', 'GELADO'],
+  },
+  {
+    id: 5,
+    name: 'Café com Leite',
+    description: 'Meio a meio de expresso tradicional com leite vaporizado',
+    price: 15,
+    img: '../../assets/coffees/cafe-com-leite.png',
+    tags: ['TRADICIONAL', 'COM LEITE'],
+  },
+  {
+    id: 6,
+    name: 'Latte',
+    description:
+      'Uma dose de café expresso com o dobro de leite e espuma cremosa',
+    price: 12.5,
+    img: '../../assets/coffees/latte.png',
+    tags: ['TRADICIONAL', 'COM LEITE'],
+  },
+  {
+    id: 7,
+    name: 'Macchiato',
+    description:
+      'Café expresso misturado com um pouco de leite quente e espuma',
+    price: 19.9,
+    img: '../../assets/coffees/macchiato.png',
+    tags: ['TRADICIONAL', 'COM LEITE'],
+  },
+  {
+    id: 8,
+    name: 'Mocaccino',
+    description: 'Café expresso com calda de chocolate, pouco leite e espuma',
+    price: 14.7,
+    img: '../../assets/coffees/mocaccino.png',
+    tags: ['TRADICIONAL', 'COM LEITE'],
+  },
+  {
+    id: 9,
+    name: 'Chocolate Quente',
+    description: 'Bebida feita com chocolate dissolvido no leite quente e café',
+    price: 10,
+    img: '../../assets/coffees/mocaccino.png',
+    tags: ['ESPECIAL', 'COM LEITE'],
+  },
+  {
+    id: 10,
+    name: 'Cubano',
+    description:
+      'Drink gelado de café expresso com rum, creme de leite e hortelã',
+    price: 10,
+    img: '../../assets/coffees/mocaccino.png',
+    tags: ['ESPECIAL', 'GELADO', 'ALCOÓLICO'],
+  },
+  {
+    id: 11,
+    name: 'Árabe',
+    description: 'Bebida preparada com grãos de café árabe e especiarias',
+    price: 12.5,
+    img: '../../assets/coffees/arabe.png',
+    tags: ['ESPECIAL'],
+  },
+  {
+    id: 12,
+    name: 'Irlandês',
+    description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
+    price: 12.5,
+    img: '../../assets/coffees/irlandes.png',
+    tags: ['ESPECIAL', 'ALCOÓLICO'],
+  },
+]
 
 export function Home() {
-  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
   return (
     <HomeContainer>
       <Container>
@@ -86,12 +201,15 @@ export function Home() {
         </main>
         <h2>Nossos cafés</h2>
         <CoffeeCardsGroup>
-          {products.map((value) => {
+          {products.map((product) => {
             return (
-              <CoffeeCard key={value}>
-                <img src={baseCoffee} alt="Café base" />
+              <CoffeeCard key={product.id}>
+                <img src={coffeeImages[product.img].default} alt="Café base" />
+
                 <CoffeeCardHeader>
-                  <span>TRADICIONAL</span>
+                  {product.tags.map((tag) => {
+                    return <span key={tag}>{tag}</span>
+                  })}
                 </CoffeeCardHeader>
 
                 <CoffeeCardBody>

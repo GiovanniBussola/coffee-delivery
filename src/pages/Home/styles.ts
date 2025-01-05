@@ -144,6 +144,8 @@ export const CoffeeCardsGroup = styled.div`
 `
 
 export const CoffeeCardHeader = styled.div`
+  gap: 0.5rem;
+
   span {
     font-size: 10px;
     font-weight: 800;

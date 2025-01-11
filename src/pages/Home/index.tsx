@@ -24,6 +24,7 @@ import { defaultTheme } from '../../styles/themes/default'
 
 import banner from '../../assets/banner.svg'
 import logo from '../../assets/logo.svg'
+import { useEffect, useState } from 'react'
 
 const coffeeImages = import.meta.glob<{ default: string }>(
   '../../assets/coffees/*.png',
@@ -44,10 +45,6 @@ interface Product {
 interface CartItem {
   productId: number
   quantity: number
-}
-
-interface Cart {
-  items: CartItem[]
 }
 
 const products: Product[] = [
@@ -152,14 +149,98 @@ const products: Product[] = [
   },
 ]
 
-const cart: Cart = {
-  items: [
-    { productId: 1, quantity: 5 },
-    { productId: 1, quantity: 5 },
-  ],
+interface ProductCounter {
+  id: number
+  quantity: number
 }
 
 export function Home() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
+
+  const [productCounter, setProductCounter] = useState<ProductCounter[]>([])
+
+  useEffect(() => {
+    setProductCounter(
+      products.map((product) => ({ id: product.id, quantity: 1 })),
+    )
+  }, [])
+
+  function handleSumProductQuantity(productId: number) {
+    setProductCounter(
+      productCounter.map((product) => {
+        if (product.id === productId) {
+          return {
+            id: product.id,
+            quantity: product.quantity + 1,
+          }
+        }
+
+        return product
+      }),
+    )
+  }
+
+  function handleMinusProductQuantity(productId: number) {
+    setProductCounter(
+      productCounter.map((product) => {
+        if (product.quantity <= 1) {
+          return product
+        }
+
+        if (product.id === productId) {
+          return {
+            id: product.id,
+            quantity: product.quantity - 1,
+          }
+        }
+
+        return product
+      }),
+    )
+  }
+
+  function handleAddToCart(productId: number) {
+    const product = productCounter.find((product) => product.id === productId)
+
+    if (product) {
+      const productAlreadyExistsInCart = cartItems.find(
+        (cartItem) => cartItem.productId === productId,
+      )
+
+      if (productAlreadyExistsInCart) {
+        setCartItems(
+          cartItems.map((cartItem) => {
+            if (cartItem.productId === product.id) {
+              return {
+                productId: cartItem.productId,
+                quantity: cartItem.quantity + product.quantity,
+              }
+            }
+
+            return cartItem
+          }),
+        )
+
+        return
+      }
+
+      setCartItems([...cartItems, { productId, quantity: product.quantity }])
+    }
+
+    setProductCounter(
+      productCounter.map((product) => {
+        if (product.id === productId) {
+          return {
+            id: product.id,
+            quantity: 1,
+          }
+        }
+
+        return product
+      }),
+    )
+  }
+
   return (
     <HomeContainer>
       <Container>
@@ -183,8 +264,8 @@ export function Home() {
                   size={22}
                 />
               </ButtonWithIcon>
-              {cart.items.length ? (
-                <CartItemsCount>{cart.items.length}</CartItemsCount>
+              {cartItems.length ? (
+                <CartItemsCount>{cartItems.length}</CartItemsCount>
               ) : (
                 ''
               )}
@@ -237,6 +318,10 @@ export function Home() {
 
         <CoffeeCardsGroup>
           {products.map((product) => {
+            const productCount = productCounter.find(
+              (counter) => counter.id === product.id,
+            )
+
             return (
               <CoffeeCard key={product.id}>
                 <img src={coffeeImages[product.img].default} alt="Café base" />
@@ -263,15 +348,22 @@ export function Home() {
                     </b>
                   </span>
                   <ButtonGroup>
-                    <button>
+                    <button
+                      onClick={() => handleMinusProductQuantity(product.id)}
+                    >
                       <Minus color={defaultTheme['purple-300']} />
                     </button>
-                    <div>1</div>
-                    <button>
+                    <div>{productCount?.quantity}</div>
+                    <button
+                      onClick={() => handleSumProductQuantity(product.id)}
+                    >
                       <Plus color={defaultTheme['purple-300']} />
                     </button>
                   </ButtonGroup>
-                  <ButtonWithIcon backgroundColor="purple-500">
+                  <ButtonWithIcon
+                    backgroundColor="purple-500"
+                    onClick={() => handleAddToCart(product.id)}
+                  >
                     <ShoppingCart weight="fill" color="white" size={20} />
                   </ButtonWithIcon>
                 </CoffeeCardFooter>

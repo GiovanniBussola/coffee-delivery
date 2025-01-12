@@ -1,32 +1,15 @@
 import styled from 'styled-components'
 import { defaultTheme } from '../../styles/themes/default'
 
-export const HomeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-
-  header {
-    margin-top: 2rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
+export const Container = styled.div`
+  h2 {
+    color: ${(props) => props.theme['gray-400']};
+    margin-bottom: 2.5rem;
   }
 
   main {
     display: flex;
     justify-content: space-between;
-    margin-top: 6rem;
     width: 100%;
 
     aside {
@@ -66,31 +49,6 @@ export const HomeContainer = styled.div`
   }
 `
 
-export const CartItemsCount = styled.span`
-  background-color: ${(props) => props.theme['yellow-500']};
-  color: ${(props) => props.theme['white-100']};
-  font-size: 14px;
-  width: 1.3rem;
-  height: 1.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-  padding: 0.2rem;
-  margin: calc(0px - 1.5rem - 5px) 0 0 calc(0px - 1.5rem - 5px);
-`
-
-export const Container = styled.div`
-  width: 1120px;
-
-  h2 {
-    color: ${(props) => props.theme['gray-400']};
-    margin-bottom: 2.5rem;
-    margin-top: 1rem;
-  }
-`
-
 interface IconBorderProps {
   color: keyof typeof defaultTheme
 }
@@ -104,26 +62,6 @@ export const IconBorder = styled.div<IconBorderProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-`
-
-interface ButtonWithIconProps {
-  backgroundColor: keyof typeof defaultTheme
-  textColor?: keyof typeof defaultTheme
-}
-
-export const ButtonWithIcon = styled.button<ButtonWithIconProps>`
-  cursor: pointer;
-  border: 0;
-  border-radius: 8px;
-  padding: 0.6rem;
-  height: 2.2rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: ${(props) => props.theme[props.backgroundColor]};
-  color: ${(props) => props.theme[props.textColor || 'gray-100']};
 `
 
 export const CoffeeCard = styled.div`

@@ -1,7 +1,5 @@
 import {
   IconBorder,
-  HomeContainer,
-  ButtonWithIcon,
   Container,
   CoffeeCard,
   CoffeeCardFooter,
@@ -9,22 +7,21 @@ import {
   CoffeeCardHeader,
   ButtonGroup,
   CoffeeCardsGroup,
-  CartItemsCount,
 } from './styles'
 import {
   ShoppingCart,
   Package,
   Clock,
   Coffee,
-  MapPin,
   Plus,
   Minus,
 } from 'phosphor-react'
 import { defaultTheme } from '../../styles/themes/default'
 
 import banner from '../../assets/banner.svg'
-import logo from '../../assets/logo.svg'
+
 import { useEffect, useState } from 'react'
+import { Button } from '../../components/Button'
 
 const coffeeImages = import.meta.glob<{ default: string }>(
   '../../assets/coffees/*.png',
@@ -242,136 +239,104 @@ export function Home() {
   }
 
   return (
-    <HomeContainer>
-      <Container>
-        <header>
-          <img src={logo} alt="Logo" />
+    <Container>
+      <main>
+        <aside>
+          <h1>
+            Encontre o café perfeito <br />
+            para qualquer hora do dia
+          </h1>
+          <p>
+            Com o Coffee Delivery você recebe seu café onde estiver, a <br />
+            qualquer hora
+          </p>
 
-          <div>
-            <ButtonWithIcon backgroundColor="purple-100" textColor="purple-300">
-              <MapPin
-                weight="fill"
-                color={defaultTheme['purple-300']}
-                size={22}
-              />
-              Douradina, PR
-            </ButtonWithIcon>
-            <>
-              <ButtonWithIcon backgroundColor="yellow-100">
-                <ShoppingCart
-                  weight="fill"
-                  color={defaultTheme['yellow-500']}
-                  size={22}
-                />
-              </ButtonWithIcon>
-              {cartItems.length ? (
-                <CartItemsCount>{cartItems.length}</CartItemsCount>
-              ) : (
-                ''
-              )}
-            </>
-          </div>
-        </header>
-        <main>
-          <aside>
-            <h1>
-              Encontre o café perfeito <br />
-              para qualquer hora do dia
-            </h1>
-            <p>
-              Com o Coffee Delivery você recebe seu café onde estiver, a <br />
-              qualquer hora
-            </p>
+          <ul>
+            <li>
+              <IconBorder color="yellow-500">
+                <ShoppingCart color="white" weight="fill" />
+              </IconBorder>
+              Compra simples e segura
+            </li>
+            <li>
+              <IconBorder color="gray-400">
+                <Package color="white" weight="fill" />
+              </IconBorder>
+              Embalagem mantém o café intacto
+            </li>
+            <li>
+              <IconBorder color="yellow-300">
+                <Clock color="white" weight="fill" />
+              </IconBorder>
+              Entrega rápida e rastreada
+            </li>
+            <li>
+              <IconBorder color="purple-500">
+                <Coffee color="white" weight="fill" />
+              </IconBorder>
+              O café chega fresquinho até você
+            </li>
+          </ul>
+        </aside>
 
-            <ul>
-              <li>
-                <IconBorder color="yellow-500">
-                  <ShoppingCart color="white" weight="fill" />
-                </IconBorder>
-                Compra simples e segura
-              </li>
-              <li>
-                <IconBorder color="gray-400">
-                  <Package color="white" weight="fill" />
-                </IconBorder>
-                Embalagem mantém o café intacto
-              </li>
-              <li>
-                <IconBorder color="yellow-300">
-                  <Clock color="white" weight="fill" />
-                </IconBorder>
-                Entrega rápida e rastreada
-              </li>
-              <li>
-                <IconBorder color="purple-500">
-                  <Coffee color="white" weight="fill" />
-                </IconBorder>
-                O café chega fresquinho até você
-              </li>
-            </ul>
-          </aside>
+        <img src={banner} alt="banner" width={476} height={400}></img>
+      </main>
 
-          <img src={banner} alt="banner" width={476} height={400}></img>
-        </main>
+      <h2>Nossos cafés</h2>
 
-        <h2>Nossos cafés</h2>
+      <CoffeeCardsGroup>
+        {products.map((product) => {
+          const productCount = productCounter.find(
+            (counter) => counter.id === product.id,
+          )
 
-        <CoffeeCardsGroup>
-          {products.map((product) => {
-            const productCount = productCounter.find(
-              (counter) => counter.id === product.id,
-            )
+          return (
+            <CoffeeCard key={product.id}>
+              <img src={coffeeImages[product.img].default} alt="Café base" />
 
-            return (
-              <CoffeeCard key={product.id}>
-                <img src={coffeeImages[product.img].default} alt="Café base" />
+              <CoffeeCardHeader>
+                {product.tags.map((tag) => {
+                  return <span key={tag}>{tag}</span>
+                })}
+              </CoffeeCardHeader>
 
-                <CoffeeCardHeader>
-                  {product.tags.map((tag) => {
-                    return <span key={tag}>{tag}</span>
-                  })}
-                </CoffeeCardHeader>
-
-                <CoffeeCardBody>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                </CoffeeCardBody>
-                <CoffeeCardFooter>
-                  <span>
-                    R${' '}
-                    <b>
-                      {Intl.NumberFormat('pt-BR', {
-                        currency: 'BRL',
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }).format(product.price)}
-                    </b>
-                  </span>
-                  <ButtonGroup>
-                    <button
-                      onClick={() => handleMinusProductQuantity(product.id)}
-                    >
-                      <Minus color={defaultTheme['purple-300']} />
-                    </button>
-                    <div>{productCount?.quantity}</div>
-                    <button
-                      onClick={() => handleSumProductQuantity(product.id)}
-                    >
-                      <Plus color={defaultTheme['purple-300']} />
-                    </button>
-                  </ButtonGroup>
-                  <ButtonWithIcon
-                    backgroundColor="purple-500"
-                    onClick={() => handleAddToCart(product.id)}
+              <CoffeeCardBody>
+                <h3>{product.name}</h3>
+                <p>{product.description}</p>
+              </CoffeeCardBody>
+              <CoffeeCardFooter>
+                <span>
+                  R${' '}
+                  <b>
+                    {Intl.NumberFormat('pt-BR', {
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }).format(product.price)}
+                  </b>
+                </span>
+                <ButtonGroup>
+                  <button
+                    onClick={() => handleMinusProductQuantity(product.id)}
                   >
-                    <ShoppingCart weight="fill" color="white" size={20} />
-                  </ButtonWithIcon>
-                </CoffeeCardFooter>
-              </CoffeeCard>
-            )
-          })}
-        </CoffeeCardsGroup>
-      </Container>
-    </HomeContainer>
+                    <Minus color={defaultTheme['purple-300']} />
+                  </button>
+                  <div>{productCount?.quantity}</div>
+                  <button onClick={() => handleSumProductQuantity(product.id)}>
+                    <Plus color={defaultTheme['purple-300']} />
+                  </button>
+                </ButtonGroup>
+                <Button
+                  backgroundColor="purple-500"
+                  onClick={() => handleAddToCart(product.id)}
+                >
+                  <ShoppingCart weight="fill" color="white" size={20} />
+                </Button>
+              </CoffeeCardFooter>
+            </CoffeeCard>
+          )
+        })}
+      </CoffeeCardsGroup>
+    </Container>
   )
 }

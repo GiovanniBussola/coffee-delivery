@@ -3,8 +3,12 @@ import { defaultTheme } from '../../styles/themes/default'
 import { CartItemsCount, HeaderContainer } from './styles'
 import { Button } from '../Button'
 import logo from '../../assets/logo.svg'
+import { CartContext } from '../../contexts/CartContext'
+import { useContext } from 'react'
 
 export function Header() {
+  const { cartItems } = useContext(CartContext)
+
   return (
     <HeaderContainer>
       <img src={logo} alt="Logo" />
@@ -23,7 +27,7 @@ export function Header() {
             />
           </Button>
 
-          <CartItemsCount>2</CartItemsCount>
+          <CartItemsCount>{cartItems.length}</CartItemsCount>
         </>
       </div>
     </HeaderContainer>

@@ -20,8 +20,9 @@ import { defaultTheme } from '../../styles/themes/default'
 
 import banner from '../../assets/banner.svg'
 
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Button } from '../../components/Button'
+import { CartContext } from '../../contexts/CartContext'
 
 const coffeeImages = import.meta.glob<{ default: string }>(
   '../../assets/coffees/*.png',
@@ -37,11 +38,6 @@ interface Product {
   price: number
   img: string
   tags: string[]
-}
-
-interface CartItem {
-  productId: number
-  quantity: number
 }
 
 const products: Product[] = [
@@ -152,7 +148,7 @@ interface ProductCounter {
 }
 
 export function Home() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const { addItemToCart } = useContext(CartContext)
 
   const [productCounter, setProductCounter] = useState<ProductCounter[]>([])
 
@@ -200,42 +196,8 @@ export function Home() {
     const product = productCounter.find((product) => product.id === productId)
 
     if (product) {
-      const productAlreadyExistsInCart = cartItems.find(
-        (cartItem) => cartItem.productId === productId,
-      )
-
-      if (productAlreadyExistsInCart) {
-        setCartItems(
-          cartItems.map((cartItem) => {
-            if (cartItem.productId === product.id) {
-              return {
-                productId: cartItem.productId,
-                quantity: cartItem.quantity + product.quantity,
-              }
-            }
-
-            return cartItem
-          }),
-        )
-
-        return
-      }
-
-      setCartItems([...cartItems, { productId, quantity: product.quantity }])
+      addItemToCart({ productId, quantity: product.quantity })
     }
-
-    setProductCounter(
-      productCounter.map((product) => {
-        if (product.id === productId) {
-          return {
-            id: product.id,
-            quantity: 1,
-          }
-        }
-
-        return product
-      }),
-    )
   }
 
   return (
